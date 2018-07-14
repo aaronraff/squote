@@ -34,21 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         apiClient = retrofit.create(IEXApiClient.class);
 
-        apiClient.price("msft").enqueue(new Callback<Stock>() {
-            @Override
-            public void onResponse(Call<Stock> call, Response<Stock> response) {
-                if(response.body() != null)
-                    Log.i("DONE", response.body().sector);
-                else
-                    Log.i("FAIL", response.toString());
-            }
-
-            @Override
-            public void onFailure(Call<Stock> call, Throwable t) {
-                System.out.println(t.toString());
-            }
-        });
-
         setListeners();
     }
 
@@ -57,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
         EditText symbolField = findViewById(R.id.symbol);
         TextView priceView = findViewById(R.id.price);
 
-        symbolField.addTextChangedListener(new SymbolWatcher(symbolField, priceView));
+        symbolField.addTextChangedListener(new SymbolWatcher(symbolField, priceView, apiClient));
     }
 }
