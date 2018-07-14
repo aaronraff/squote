@@ -1,5 +1,6 @@
 package com.aaronraffdev.squote;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
@@ -26,12 +27,13 @@ public class SymbolWatcher implements TextWatcher {
     private TextView priceView;
     private IEXApiClient apiClient;
 
+    private UIUpdater<Stock> uiUpdater;
     private Timer timer = new Timer();
 
-    public SymbolWatcher(EditText symbolField, TextView priceView, IEXApiClient apiClient) {
+    public SymbolWatcher(EditText symbolField, IEXApiClient apiClient, Activity activity) {
         this.symbolField = symbolField;
-        this.priceView = priceView;
         this.apiClient = apiClient;
+        this.uiUpdater = new HomeUIUpdater(activity);
     }
 
     @Override
@@ -57,7 +59,7 @@ public class SymbolWatcher implements TextWatcher {
                         Utils.runOnUIThread(new Runnable() {
                             @Override
                             public void run() {
-                                getStockInfo(symbolField.getText().toString());
+                                updateUI(symbolField.getText().toString());
                             }
                         });
                     }
@@ -65,13 +67,12 @@ public class SymbolWatcher implements TextWatcher {
         );
     }
 
-    private void getStockInfo(String symbol) {
+    private void updateUI(String symbol) {
         apiClient.price(symbol).enqueue(new Callback<Stock>() {
             @Override
             public void onResponse(Call<Stock> call, Response<Stock> response) {
                 if(response.body() != null) {
-                    Log.i("DONE", response.body().getSector());
-                    updateUI(response);
+                    uiUpdater.update(response.body());
                 }
                 else {
                     Log.i("FAIL", response.toString());
@@ -80,18 +81,8 @@ public class SymbolWatcher implements TextWatcher {
 
             @Override
             public void onFailure(Call<Stock> call, Throwable t) {
-                System.out.println(t.toString());
+                Log.e("ERR", t.toString());
             }
         });
-    }
-
-    private void updateUI(Response<Stock> response)
-    {
-        String priceString = new StringBuilder()
-                .append("$")
-                .append(response.body().getLatestPrice())
-                .toString();
-
-        priceView.setText(priceString);
     }
 }
