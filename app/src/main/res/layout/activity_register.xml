@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_marginHorizontal="30dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aaronraffdev.squote.MainActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/textView2"
@@ -15,10 +15,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Login"
+        android:text="Register"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/email_login"
+        app:layout_constraintBottom_toTopOf="@+id/name_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,11 +26,11 @@
 
 
     <EditText
-        android:id="@+id/email_login"
+        android:id="@+id/name_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
-        android:hint="Username"
+        android:hint="Name"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -38,39 +38,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/password_login"
+        android:id="@+id/email_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Username"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/name_register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/name_register"
+        app:layout_constraintTop_toBottomOf="@+id/name_register" />
+
+    <EditText
+        android:id="@+id/password_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:inputType="textPassword"
         android:hint="Password"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/email_login"
-        app:layout_constraintStart_toStartOf="@+id/email_login"
-        app:layout_constraintTop_toBottomOf="@+id/email_login" />
+        app:layout_constraintEnd_toEndOf="@+id/email_register"
+        app:layout_constraintStart_toStartOf="@+id/email_register"
+        app:layout_constraintTop_toBottomOf="@+id/email_register" />
 
     <Button
-        android:id="@+id/submit_login"
+        android:id="@+id/submit_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Sign in"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/password_login"
-        app:layout_constraintStart_toStartOf="@+id/password_login"
-        app:layout_constraintTop_toBottomOf="@+id/password_login" />
+        app:layout_constraintEnd_toEndOf="@+id/password_register"
+        app:layout_constraintStart_toStartOf="@+id/password_register"
+        app:layout_constraintTop_toBottomOf="@+id/password_register" />
 
     <TextView
-        android:id="@+id/go_to_register"
+        android:id="@+id/go_to_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Create an account"
-        app:layout_constraintEnd_toEndOf="@+id/submit_login"
-        app:layout_constraintStart_toStartOf="@+id/submit_login"
-        app:layout_constraintTop_toBottomOf="@+id/submit_login" />
+        android:text="Already have an account?"
+        app:layout_constraintEnd_toEndOf="@+id/submit_register"
+        app:layout_constraintStart_toStartOf="@+id/submit_register"
+        app:layout_constraintTop_toBottomOf="@+id/submit_register" />
 
 </android.support.constraint.ConstraintLayout>
