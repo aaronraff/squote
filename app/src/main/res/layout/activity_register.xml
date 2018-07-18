@@ -8,47 +8,34 @@
     tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="50dp"
         android:text="Register"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/name_register"
+        app:layout_constraintBottom_toTopOf="@+id/email_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522" />
-
-
-    <EditText
-        android:id="@+id/name_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:hint="Name"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.522"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <EditText
         android:id="@+id/email_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/name_register"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/name_register"
-        app:layout_constraintTop_toBottomOf="@+id/name_register" />
+        app:layout_constraintEnd_toEndOf="@+id/register_title"
+        app:layout_constraintStart_toStartOf="@+id/register_title"
+        app:layout_constraintTop_toBottomOf="@+id/register_title" />
 
     <EditText
         android:id="@+id/password_register"
