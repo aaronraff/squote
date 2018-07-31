@@ -52,4 +52,15 @@
         app:layout_constraintTop_toBottomOf="@+id/companyName"
         app:layout_constraintVertical_bias="0.355" />
 
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu">
+
+    </android.support.design.widget.BottomNavigationView>
+
 </android.support.constraint.ConstraintLayout>
