@@ -66,3 +66,6 @@ fastlane/readme.md
 
 # Mac Specific
 .DS_Store
+
+# IDEA IDE
+.idea
