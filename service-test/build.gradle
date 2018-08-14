@@ -1,6 +1,5 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'application'
+mainClassName = 'com.company.Main'
 
 version '1.0-SNAPSHOT'
 
