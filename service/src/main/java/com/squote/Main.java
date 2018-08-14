@@ -1,4 +1,4 @@
-package com.company;
+package com.squote;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -21,16 +21,19 @@ public class Main {
     String serviceAccountConfigPath = props.getProperty("serviceAccoutConfigPath");
     String dbUrl = props.getProperty("dbUrl");
 
+    initializeFirebaseApp(serviceAccountConfigPath, dbUrl);
+  }
 
+  private static void initializeFirebaseApp(String serviceAccountConfigPath, String dbUrl) {
     try (FileInputStream serviceAccount = new FileInputStream(serviceAccountConfigPath)) {
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl(dbUrl)
-                .build();
+      FirebaseOptions options = new FirebaseOptions.Builder()
+              .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+              .setDatabaseUrl(dbUrl)
+              .build();
 
-        FirebaseApp.initializeApp(options);
+      FirebaseApp.initializeApp(options);
     } catch (Exception ex) {
-        System.out.println(ex);
+      System.out.println(ex);
     }
   }
 }

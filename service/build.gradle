@@ -1,5 +1,5 @@
 apply plugin: 'application'
-mainClassName = 'com.company.Main'
+mainClassName = 'com.squote.Main'
 
 version '1.0-SNAPSHOT'
 
