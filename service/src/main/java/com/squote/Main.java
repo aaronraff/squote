@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -18,10 +19,14 @@ public class Main {
       System.out.println(ex);
     }
 
-    String serviceAccountConfigPath = props.getProperty("serviceAccoutConfigPath");
+    String serviceAccountConfigPath = props.getProperty("serviceAccountConfigPath");
     String dbUrl = props.getProperty("dbUrl");
+    String symbolRefString = props.getProperty("symbolRefString");
 
     initializeFirebaseApp(serviceAccountConfigPath, dbUrl);
+
+    SymbolUpdater symbolUpdaterJob = new SymbolUpdater(symbolRefString);
+    symbolUpdaterJob.runDailyJob();
   }
 
   private static void initializeFirebaseApp(String serviceAccountConfigPath, String dbUrl) {

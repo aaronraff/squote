@@ -12,4 +12,5 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation 'com.google.firebase:firebase-admin:6.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }

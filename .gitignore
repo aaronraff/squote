@@ -71,3 +71,6 @@ fastlane/readme.md
 .idea
 
 firebaseAdmin/
+
+# FBInfer
+infer-out
