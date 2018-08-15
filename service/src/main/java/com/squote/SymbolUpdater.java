@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -32,7 +34,7 @@ public class SymbolUpdater {
         // IEXAPI updates symbols at 7:45 EST
         // Run a few minutes after to have a buffer
         ZonedDateTime timeToRun = ZonedDateTime.now(ZoneId.of("America/New_York"))
-                .withHour(8).withMinute(0).withSecond(0);
+                .withHour(22).withMinute(6).withSecond(0);
 
         // Used to schedule at the same time every day.
         long initialDelay = getInitialDelay(timeToRun);
@@ -76,16 +78,27 @@ public class SymbolUpdater {
                 .build();
 
         Response response = client.newCall(request).execute();
-        return response.body().toString();
+        return response.body().string();
     }
 
     private void writeData(JSONArray symbols) {
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference(symbolRefString);
 
+        Map<String, String> data = new HashMap<>();
+
         for (int index = 0; index < symbols.length(); index++) {
-            JSONObject symbol = symbols.getJSONObject(index);
-            ref.push().setValueAsync(symbol.getString("symbol"));
+            JSONObject info = symbols.getJSONObject(index);
+
+            String symbol = info.getString("symbol");
+            String name = info.getString("name");
+            Boolean isEnabled = info.getBoolean("isEnabled");
+
+            // Only add symbols that are enabled on IEX
+            if (isEnabled)
+                data.put(symbol, name);
         }
+
+        ref.push().setValueAsync(data);
     }
 }
