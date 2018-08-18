@@ -14,3 +14,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-admin:6.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }
+
+run {
+    if (project.hasProperty("myArgs"))
+        args project.property("myArgs")
+}

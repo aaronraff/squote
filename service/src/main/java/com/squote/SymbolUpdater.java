@@ -61,7 +61,7 @@ public class SymbolUpdater {
         return initialDelay;
     }
 
-    private void runJob() {
+    public void runJob() {
         try {
             String res = getRefData();
             JSONArray symbols = new JSONArray(res);
