@@ -1,7 +1,6 @@
 package com.squote;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -82,9 +81,9 @@ public class SymbolUpdater {
 
     private void writeData(JSONArray symbols) {
         DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference(symbolRefString);
+                .getReference().child(symbolRefString);
 
-        HashMap<String, Stock> data = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
 
         for (int index = 0; index < symbols.length(); index++) {
             JSONObject info = symbols.getJSONObject(index);
@@ -92,15 +91,26 @@ public class SymbolUpdater {
             String symbol = info.getString("symbol");
             String name = info.getString("name");
             Boolean isEnabled = info.getBoolean("isEnabled");
+            String hash = Integer.toString(name.hashCode());
 
-            // Only add symbols that are enabled on IEX
+            // Only add stocks that are enabled on IEX
             if (isEnabled) {
-                String uuid = UUID.randomUUID().toString();
-                Stock s = new Stock(symbol, name);
-                data.put(uuid, s);
+                // Store key as hash to find it later when updating
+                Stock stock = new Stock(symbol, name);
+                data.put(hash, stock);
+            } else {
+                // Use null to remove the record if there is one
+                data.put(hash, null);
             }
         }
 
-        ref.push().setValueAsync(data);
+        // Write all of the data at once
+        try {
+            // get method blocks
+            ref.updateChildrenAsync(data).get();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
+
 }
