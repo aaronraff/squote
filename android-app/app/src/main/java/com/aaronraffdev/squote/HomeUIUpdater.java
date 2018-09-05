@@ -13,10 +13,10 @@ public class HomeUIUpdater implements UIUpdater<Stock> {
     private EditText symbolField;
 
     public HomeUIUpdater(Activity activity) {
-        this.activity = activity;
-        this.companyNameView = activity.findViewById(R.id.companyName);
-        this.priceView = activity.findViewById(R.id.price);
-        this.symbolField = activity.findViewById(R.id.symbol);
+//        this.activity = activity;
+//        this.companyNameView = activity.findViewById(R.id.companyName);
+//        this.priceView = activity.findViewById(R.id.price);
+//        this.symbolField = activity.findViewById(R.id.symbol);
     }
 
     public void update(Stock s) {

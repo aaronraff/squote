@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        // Send the user to the home page if they are already authenticated
         if (auth.getCurrentUser() != null) {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);

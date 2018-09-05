@@ -1,7 +1,12 @@
 package com.aaronraffdev.squote;
 
+import android.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import retrofit2.Retrofit;
@@ -26,7 +31,28 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        EditText symbolField = findViewById(R.id.symbol);
-        symbolField.addTextChangedListener(new SymbolWatcher(symbolField, apiClient, this));
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_nav);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        updateFragment(item);
+                        return true;
+                    }
+                });
     }
+
+    private void updateFragment(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                getFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragment_content, new SearchFragment())
+                        .commit();
+        }
+    }
+
+
 }
