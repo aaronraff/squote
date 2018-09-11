@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyViewHolder> {
-    public Stock[] dataSet;
+    public ArrayList<Stock> dataSet;
 
     public static class CompanyViewHolder extends RecyclerView.ViewHolder {
         public View companyListItem;
@@ -18,7 +21,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         }
     }
 
-    public CompanyAdapter(Stock[] dataSet) {
+    public CompanyAdapter(ArrayList<Stock> dataSet) {
         this.dataSet = dataSet;
     }
 
@@ -35,11 +38,11 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     public void onBindViewHolder(CompanyViewHolder holder, int position) {
         TextView companyNameTextView = (TextView) holder.companyListItem
                 .findViewById(R.id.company_name_text_view);
-        companyNameTextView.setText(dataSet[position].getCompanyName());
+        companyNameTextView.setText(dataSet.get(position).getCompanyName());
     }
 
     @Override
     public int getItemCount() {
-        return dataSet.length;
+        return dataSet.size();
     }
 }
