@@ -7,6 +7,11 @@ public class Stock {
     private String sector;
     private String symbol;
 
+    public Stock(String symbol, String companyName) {
+        this.symbol = symbol;
+        this.companyName = companyName;
+    }
+
     public String getCompanyName() {
         return companyName;
     }

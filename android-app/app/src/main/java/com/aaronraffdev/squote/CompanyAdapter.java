@@ -38,7 +38,12 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     public void onBindViewHolder(CompanyViewHolder holder, int position) {
         TextView companyNameTextView = (TextView) holder.companyListItem
                 .findViewById(R.id.company_name_text_view);
+
+        TextView companySymbolTextView = (TextView) holder.companyListItem
+                .findViewById(R.id.company_symbol_text_view);
+
         companyNameTextView.setText(dataSet.get(position).getCompanyName());
+        companySymbolTextView.setText(dataSet.get(position).getSymbol());
     }
 
     @Override
