@@ -16,11 +16,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
-    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +60,19 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            user = auth.getCurrentUser();
                             Log.d("AUTH", "Successfully registered an account.");
-                        } else {
-                            Toast.makeText(RegisterActivity.this, task.getResult().toString(), Toast.LENGTH_SHORT);
+
+                            // Go to the home activity
+                            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                            startActivity(intent);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterActivity.this, e.toString(), Toast.LENGTH_SHORT);
+                Toast.makeText(RegisterActivity.this,
+                          "There was an error creating your account.",
+                                Toast.LENGTH_SHORT).show();
             }
         });
     }

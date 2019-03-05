@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         setListeners();
     }
 
-
     private void setListeners() {
         TextView goToRegister = findViewById(R.id.go_to_register);
 
@@ -64,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void goToHome() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
     private void login(String email, String password) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -72,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             user = auth.getCurrentUser();
                             Log.d("AUTH", "Successfully logged in.");
-                        } else {
-                            Toast.makeText(MainActivity.this, task.getResult().toString(), Toast.LENGTH_SHORT);
+                            goToHome();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT);
-            }
+                Toast.makeText(MainActivity.this,
+                          "Email or password is incorrect.",
+                                Toast.LENGTH_SHORT).show();            }
         });
     }
 }
